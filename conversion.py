@@ -4,8 +4,8 @@
 # function Choosing a conversion category (distance, flow, volume, Area, pressure, Liquid Flow, Speed, Gas Flow)
 def conversion_cat():
     while True:
-        print("welcome !")
-        print("Choose a category from the list below? Enter corresponding number")
+        print("welcome to the Unit Converter!\n")
+        print('Choose a category from the list below? (Enter corresponding number)')
         print("1. Distance \n2. Area \n3. Volume \n4. Pressure \n5. Speed \n6. Mass \n7. Liquid Flow \n8. Gas Flow")
         conversion_choice = input()
         if conversion_choice.isnumeric() and len(conversion_choice) == 1 and 0 < int(conversion_choice) < 9:
@@ -17,10 +17,9 @@ def conversion_cat():
 # Function to get value to convert from user
 def value_to_convert():
     while True:
-        print("Enter value to convert: ")
+        print("\nEnter value to convert: ")
         value_entered = input()
         if value_entered.isnumeric():
-            value_entered = int(value_entered)
             return float(value_entered)
         else:
             continue
@@ -40,9 +39,10 @@ def choose_unit(category_choice):
 
     if category_choice == 1:
         while True:
-            print("Enter unit: (choose/type from the list/table below): ")
+            print("\nEnter unit: (choose/type from the list below): ")
             print("Distance : mm, in, cm, m, km, mi, ft, yd")
             unit = input()
+            unit = unit.lower()
             for item in distance_units_dict.keys():
                 if unit.isalpha() and distance_units_dict[item] == unit:
                     return str(unit)
@@ -51,10 +51,11 @@ def choose_unit(category_choice):
 
     if category_choice == 2:
         while True:
-            print("Enter unit: (choose/type from the list/table below): ")
+            print("\nEnter unit: (choose/type from the list below): ")
             print("Area : acre, m2, ft2 (square foot), km2, hectare, yd2 (square yard), "
                   "sqmi (square mile), in2 (square inch)")
             unit = input()
+            unit = unit.lower()
             for item in area_units_dict.keys():
                 if area_units_dict[item] == unit:
                     return str(unit)
@@ -63,9 +64,10 @@ def choose_unit(category_choice):
 
     if category_choice == 3:
         while True:
-            print("Enter unit: (choose/type from the list/table below): ")
+            print("\nEnter unit: (choose/type from the list below): ")
             print("Volume : m3, bbl (for us Barrel), l, cuft, gal (for us gallon), qt")
             unit = input()
+            unit = unit.lower()
             for item in volume_units_dict.keys():
                 if volume_units_dict[item] == unit:
                     return str(unit)
@@ -74,9 +76,10 @@ def choose_unit(category_choice):
 
     if category_choice == 4:
         while True:
-            print("Enter unit: (choose/type from the list/table below): ")
+            print("\nEnter unit: (choose/type from the list below): ")
             print("Pressure : Mpa, atm (standard atmosphere), bar, pa, psi")
             unit = input()
+            unit = unit.lower()
             for item in pressure_units_dict.keys():
                 if pressure_units_dict[item] == unit:
                     return str(unit)
@@ -85,9 +88,10 @@ def choose_unit(category_choice):
 
     if category_choice == 5:
         while True:
-            print("Enter unit: (choose/type from the list/table below): ")
+            print("\nEnter unit: (choose/type from the list below): ")
             print("Speed : mph, kmh, ft/s, m/s, knot")
             unit = input()
+            unit = unit.lower()
             for item in speed_units_dict.keys():
                 if speed_units_dict[item] == unit:
                     return str(unit)
@@ -96,9 +100,10 @@ def choose_unit(category_choice):
 
     if category_choice == 6:
         while True:
-            print("Enter unit: (choose/type from the list/table below): ")
+            print("\nEnter unit: (choose/type from the list below): ")
             print("Mass : t, kg, g, lbs, oz, mg")
             unit = input()
+            unit = unit.lower()
             for item in mass_units_dict.keys():
                 if mass_units_dict[item] == unit:
                     return str(unit)
@@ -107,9 +112,10 @@ def choose_unit(category_choice):
 
     if category_choice == 7:
         while True:
-            print("Enter unit: (choose/type from the list/table below): ")
+            print("\nEnter unit: (choose/type from the list below): ")
             print("Liquid Flow : bpd (bbls/day), bph (bbls/hour), bpm, gph, gpm, l/h, m3h, m3d, l/s")
             unit = input()
+            unit = unit.lower()
             for item in liqflow_units_dict.keys():
                 if liqflow_units_dict[item] == unit:
                     return str(unit)
@@ -118,9 +124,10 @@ def choose_unit(category_choice):
 
     if category_choice == 8:
         while True:
-            print("Enter unit: (choose/type from the list/table below): ")
+            print("\nEnter unit: (choose/type from the list below): ")
             print("Gas Flow : mscfd (million standard cubic feet per day), scfh, scfm")
             unit = input()
+            unit = unit.lower()
             for item in gasflow_units_dict.keys():
                 if gasflow_units_dict[item] == unit:
                     return str(unit)
@@ -309,59 +316,41 @@ def gasflow(u_from, val, u_to):
 
 
 # Main body of the code I call my functions here to perform the conversion
-category = conversion_cat()
-if category == 1:
+while True:
+    category = conversion_cat()
     unit_from = choose_unit(category)
     value = value_to_convert()
     unit_to = choose_unit(category)
-    result = distance(unit_from, value, unit_to)
-    print("{} {} is equal to {} {}".format(value, unit_from, result, unit_to))
 
-elif category == 2:
-    unit_from = choose_unit(category)
-    value = value_to_convert()
-    unit_to = choose_unit(category)
-    result = area(unit_from, value, unit_to)
-    print("{} {} is equal to {} {}".format(value, unit_from, result, unit_to))
+    if category == 1:
+        result = distance(unit_from, value, unit_to)
 
-elif category == 3:
-    unit_from = choose_unit(category)
-    value = value_to_convert()
-    unit_to = choose_unit(category)
-    result = volume(unit_from, value, unit_to)
-    print("{} {} is equal to {} {}".format(value, unit_from, result, unit_to))
+    elif category == 2:
+        result = area(unit_from, value, unit_to)
 
-elif category == 4:
-    unit_from = choose_unit(category)
-    value = value_to_convert()
-    unit_to = choose_unit(category)
-    result = pressure(unit_from, value, unit_to)
-    print("{} {} is equal to {} {}".format(value, unit_from, result, unit_to))
+    elif category == 3:
+        result = volume(unit_from, value, unit_to)
 
-elif category == 5:
-    unit_from = choose_unit(category)
-    value = value_to_convert()
-    unit_to = choose_unit(category)
-    result = speed(unit_from, value, unit_to)
-    print("{} {} is equal to {} {}".format(value, unit_from, result, unit_to))
+    elif category == 4:
+        result = pressure(unit_from, value, unit_to)
 
-elif category == 6:
-    unit_from = choose_unit(category)
-    value = value_to_convert()
-    unit_to = choose_unit(category)
-    result = mass(unit_from, value, unit_to)
-    print("{} {} is equal to {} {}".format(value, unit_from, result, unit_to))
+    elif category == 5:
+        result = speed(unit_from, value, unit_to)
 
-elif category == 7:
-    unit_from = choose_unit(category)
-    value = value_to_convert()
-    unit_to = choose_unit(category)
-    result = liquidflow(unit_from, value, unit_to)
-    print("{} {} is equal to {} {}".format(value, unit_from, result, unit_to))
+    elif category == 6:
+        result = mass(unit_from, value, unit_to)
 
-elif category == 8:
-    unit_from = choose_unit(category)
-    value = value_to_convert()
-    unit_to = choose_unit(category)
-    result = gasflow(unit_from, value, unit_to)
-    print("{} {} is equal to {} {}".format(value, unit_from, result, unit_to))
+    elif category == 7:
+        result = liquidflow(unit_from, value, unit_to)
+
+    elif category == 8:
+        result = gasflow(unit_from, value, unit_to)
+
+    print("\n{} {} is equal to {} {}".format(value, unit_from, result, unit_to))
+
+    print("\nDo you wish to convert another value? \n(Enter Y or N)")
+    answer = input()
+    if answer.lower() == "y" or answer.lower() == "yes":
+        continue
+    else:
+        break
